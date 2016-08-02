@@ -9,23 +9,16 @@ if len(sys.argv) == 1:
 #output: tab delimited file in the format of 
 #GENE	METAGID	"blast best hit"
 #
-#to use with multiple *.m8 files:
-#	for i in *.m8; do python blast-m8-parser-best_to_1_file.py $i; done > all_best.txt
+#to use with multiple *.m8.besthit files:
+#	for i in *.m8.besthit; do python blast-m8-parser-best_to_1_file.py $i; done > all_best.txt
 #```
 
 f = sys.argv[1]
-arg = f.split('.x.')[0].split('.')[0]
-metag = f.split('.x.')[1].split('.')[0]
-
-d = {}
+metag = f.split('.')[0]
 
 for line in open(f):
     data = line.rstrip().split('\t')
     query = data[0]
     hit = data[1]
-    if d.has_key(query):
-        continue
-    else:
-        d[query] = hit
-	print arg + "\t" + str(metag) + "\t" + line,
+	print query + "\t" + str(metag) + "\t" + line,
        # print line, 
